@@ -109,8 +109,8 @@ def choice_char_class():
             # Вывели в терминал описание персонажа.
             print(game_classes[selected_class](selected_class))
             approve_choice = input('Нажми (Y), чтобы подтвердить выбор, '
-                               'или любую другую кнопку, '
-                               'чтобы выбрать другого персонажа ').lower()
+                                   'или любую другую кнопку, '
+                                   'чтобы выбрать другого персонажа ').lower()
     return game_classes[selected_class](selected_class)
 
 
