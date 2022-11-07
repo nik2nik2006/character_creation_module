@@ -1,8 +1,9 @@
 from random import randint
 
 DEFAULT_ATTACK = 5
-DEFAULT_DEFENCE = 10 
-DEFAULT_STAMINA = 80 
+DEFAULT_DEFENCE = 10
+DEFAULT_STAMINA = 80
+
 
 class Character:
     # Новая константа.
@@ -26,12 +27,13 @@ class Character:
     def special(self):
         return (f'{self.name} применил специальное умение '
                 f'"{self.SPECIAL_SKILL} {self.SPECIAL_BUFF}"')
-    
+
     # Новый метод базового класса.
     def __str__(self):
         return f'{self.__class__.__name__} - {self.BRIEF_DESC_CHAR_CLASS}.'
 
 # Далее описываем классы-наследники.
+
 
 class Warrior(Character):
     BRIEF_DESC_CHAR_CLASS = (' дерзкий воин ближнего боя. '
@@ -45,6 +47,7 @@ class Warrior(Character):
         value_attack = DEFAULT_ATTACK + randint(*self.RANGE_VALUE_ATTACK)
         return (f'{self.name} нанёс противнику урон, равный {value_attack}')
 
+
 class Mage(Character):
     BRIEF_DESC_CHAR_CLASS = (' находчивый воин дальнего боя. '
                              'Обладает высоким интеллектом')
@@ -52,6 +55,7 @@ class Mage(Character):
     RANGE_VALUE_DEFENCE = (-2, 2)
     SPECIAL_BUFF = DEFAULT_ATTACK + 40
     SPECIAL_SKILL = 'Атака'
+
 
 class Healer(Character):
     BRIEF_DESC_CHAR_CLASS = (' могущественный заклинатель. '
@@ -86,24 +90,25 @@ def start_training(character):
 
 # Новая функция.
 # Добавили новый параметр — char_name.
+
+
 def choice_char_class():
     """
     Возвращает строку с выбранным
     классом персонажа.
     """
-    # Добавили словарь, в котором соотносится ввод пользователя и класс персонажа.
+    # Добавили словарь, в котором соотносится
+    #  ввод пользователя и класс персонажа.
     game_classes = {'warrior': Warrior, 'mage': Mage, 'healer': Healer}
-    
-    approve_choice: str  = None
-    
+    approve_choice: str = None
     while approve_choice != 'y':
         selected_class = input('Введи название персонажа, '
-                           'за которого хочешь играть: Воитель — warrior, '
-                           'Маг — mage, Лекарь — healer: ')
+                               'за которого хочешь играть: Воитель — warrior, '
+                               'Маг — mage, Лекарь — healer: ')
         if selected_class in game_classes:
             # Вывели в терминал описание персонажа.
-            print(f'Ты выбрал {selected_class}')
-        approve_choice = input('Нажми (Y), чтобы подтвердить выбор, '
+            print(game_classes[selected_class](selected_class))
+            approve_choice = input('Нажми (Y), чтобы подтвердить выбор, '
                                'или любую другую кнопку, '
                                'чтобы выбрать другого персонажа ').lower()
     return game_classes[selected_class](selected_class)
